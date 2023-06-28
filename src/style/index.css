@@ -1,0 +1,95 @@
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  line-height: 1;
+}
+#codemirrorWrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#codemirror_container {
+  width: 100%;
+  height: 100%;
+}
+#codemirror_container.noCursor .remote-caret {
+  display: none !important;
+}
+#disable_scroll_layer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+}
+#disable_scroll_layer.show {
+  display: block;
+}
+
+.CodeMirror {
+  height: 100%;
+  font-size: .08rem;
+  -webkit-text-size-adjust: none;
+}
+.remote-caret {
+  position: relative;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin-left: -1px;
+  margin-right: -1px;
+  box-sizing: border-box;
+  border-color: rgba(57,151,248,1) !important;
+}
+.remote-caret > div {
+  position: absolute;
+  top: -1em;
+  left: -1px;
+  font-size: .6em;
+  /* background-color: rgb(250, 129, 0); */
+  background-color: rgba(57,151,248,1) !important;
+  font-family: serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  user-select: none;
+  color: white;
+  padding-left: 2px;
+  padding-right: 2px;
+  z-index: 3;
+  transition: opacity .3s ease-in-out;
+  border-radius: 2px;
+}
+.remote-caret.hide-name > div {
+  /* transition-delay: .7s; */
+  /* opacity: 0; */
+}
+.remote-caret:hover > div {
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.CodeMirror-overlayscroll-horizontal div, .CodeMirror-overlayscroll-vertical div {
+  background-color: rgba(255,255,255,.2);
+}
+
+.CodeMirror-overlayscroll-horizontal {
+  height: .04rem;
+  max-height: 4px;
+}
+
+.CodeMirror-overlayscroll-vertical {
+  width: .04rem;
+  max-width: 4px;
+}
+
+/* .y-line-selection {
+  background-color: rgba(57,151,248,.5) !important; 
+} */

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      position: relative;
+    }
+    /* iframe {
+      width: 360px;
+      height: 203px;
+    } */
+    iframe {
+      width: 572px;
+      height: 322px;
+    }
+    #iframe2 {
+      width: 800px;
+      height: 450px;
+    }
+  </style>
+</head>
+<body>
+  <h1>容器层</h1>
+  <div>
+    <button id='btn1'>副编辑授权</button>
+    <button id='btn2'>取消副编辑授权</button>
+    <button id='btn3'>切换成javascript</button>
+    <button id='btn4'>切换成go</button>
+    <button id='btn5'>切换成 text</button>
+
+  </div>
+  <div class="container">
+    <h2>这是iframe1</h2>
+    <iframe id='iframe1' src="http://localhost:8080/?clientType=web&userName=nick&role=0&userId=1111&serial=111&cursor=true" frameBorder="0"></iframe>
+    <h2>这是iframe2</h2>
+    <iframe id='iframe2' src="http://localhost:8080/?clientType=web&userName=jack&role=0&userId=2222&serial=111&cursor=true" frameborder="0"></iframe>
+  </div>
+
+  <script>
+    window.onload = function() {
+      
+      const iframe1Ele = document.getElementById('iframe1')
+      const iframe2Ele = document.getElementById('iframe2')
+      window.addEventListener('message', data => {
+        const messageData = typeof data.data === 'string' && data.data !== 'undefined' ? JSON.parse(data.data) : data.data;
+        switch(messageData.type) {
+          case 'CoopEditor_update_message':
+            // iframe1Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_message', data: messageData.data}), '*')
+            iframe2Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_message', data: messageData.data}), '*')
+            break
+          case 'CoopEditor_update_scroll':
+            // iframe1Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_scroll', data: messageData.data }), '*')
+            iframe2Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_scroll', data: messageData.data }), '*')
+            break
+        }
+      })
+
+      const btn1Ele = document.getElementById('btn1')
+      const btn2Ele = document.getElementById('btn2')
+      const btn3Ele = document.getElementById('btn3')
+      const btn4Ele = document.getElementById('btn4')
+      const btn5Ele = document.getElementById('btn5')
+      btn1Ele.addEventListener('click', () => {
+        iframe2Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_canDraw', data: true }), '*')
+      })
+      btn2Ele.addEventListener('click', () => {
+        iframe2Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_canDraw', data: false }), '*')
+      })
+      btn3Ele.addEventListener('click', () => {
+        iframe1Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_changeLang', data: 'Javascript' }), '*')
+        iframe2Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_changeLang', data: 'Javascript' }), '*')
+      })
+      btn4Ele.addEventListener('click', () => {
+        iframe1Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_changeLang', data: 'Go' }), '*')
+        iframe2Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_changeLang', data: 'Go' }), '*')
+      })
+      btn5Ele.addEventListener('click', () => {
+        iframe1Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_changeLang', data: 'Textile' }), '*')
+        iframe2Ele.contentWindow.postMessage(JSON.stringify({ type: 'CoopEditor_changeLang', data: 'Textile' }), '*')
+      })
+
+    }
+  </script>
+</body>
+</html>
