@@ -21,7 +21,7 @@
 - native to editor
   + window.nativeToCoopEditorAction
 - editor to native
-  + android: window.JSWhitePadInterface.coopEditorAction
+  + android: window.coopEditorAction
   + ios: window.webkit.messageHandlers.coopEditorAction.postMessage
 ### 消息格式
 数据格式均为JSON String,不同type下data数据不同
