@@ -10,7 +10,7 @@ module.exports = env => {
     },
     output: {
       // globalObject: 'self',
-      path: path.resolve(__dirname, './dist/'),
+      path: path.resolve(__dirname, '../dist/'),
       filename: '[name].bundle.[fullhash:8].js',
       // publicPath: '/dist/'
     },
